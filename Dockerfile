@@ -26,7 +26,6 @@ RUN /opt/birdcam/venv/bin/pip install argparse opencv-python mediapipe
 
 ADD detect.py /opt/birdcam/detect.py
 ADD utils.py /opt/birdcam/utils.py
-ADD requirements.txt /opt/birdcam/requirements.txt
 ADD docker-entrypoint.sh /opt/birdcam/docker-entrypoint.sh
 
 VOLUME /opt/birdcam/model
