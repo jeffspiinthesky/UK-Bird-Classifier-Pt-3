@@ -1,0 +1,11 @@
+version: "3.5"
+services:
+  birdcam-ai:
+    container_name: birdcam-ai
+    restart: unless-stopped
+    image: birdcam_ai:0.0.1
+    volumes:
+      - /home/pi/bird_model.tflite:/opt/birdcam/model/bird_model.tflite
+    environment:
+      CAM_URI: "rtsp://user:password@192.168.0.20/camera"
+      RTMP_OUT: "rtmp://192.168.0.21/birdcam_live"
