@@ -1,7 +1,7 @@
 class OpenStreamException(Exception):
   """Exception thrown if webcam cannot be opened"""
 
-class WebcamReadException(Except8ion):
+class WebcamReadException(Exception):
   """Exception thrown if frame cannot be read from webcam"""
 
 class NoImageInDetectorException(Exception):

@@ -5,7 +5,7 @@ class Visualiser:
   def __init__(self):
     self.fps_avg_frame_count = 8
 
-  def show_fps(self, frame, fps, webcam):
+  def show_fps(self, frame, fps):
     # Show the FPS
     row_size = 50  # pixels
     left_margin = 24  # pixels
@@ -14,7 +14,8 @@ class Visualiser:
     thickness = 1
     fps_text = f'FPS = {fps:.1f}'
     text_location = (left_margin, row_size)
-    webcam.overlay_text(frame, fps_text, text_location, FONT_HERSHEY_DUPLEX, size, colour, thickness, LINE_AA)
+    self.draw_text(frame, fps_text, FONT_HERSHEY_DUPLEX, text_location, size, thickness, colour, (255,255,255))
+    return frame
 
   def draw_text(self,frame, text,
           font=FONT_HERSHEY_PLAIN,
@@ -32,7 +33,7 @@ class Visualiser:
     putText(frame, text, (x, y + text_h + font_scale - 1), font, font_scale, text_color, font_thickness)
     return text_size
 
-  def upadte_frame(self,frame,detection_result) -> np.ndarray:
+  def update_frame(self,frame,detection_result) -> np.ndarray:
     MARGIN = 10  # pixels
     ROW_SIZE = 30  # pixels
     FONT_SIZE = 1

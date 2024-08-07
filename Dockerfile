@@ -24,8 +24,12 @@ RUN /root/.pyenv/shims/python -m venv venv
 RUN /opt/birdcam/venv/bin/pip install --upgrade pip
 RUN /opt/birdcam/venv/bin/pip install argparse opencv-python mediapipe
 
-ADD detect.py /opt/birdcam/detect.py
-ADD utils.py /opt/birdcam/utils.py
+ADD app.py /opt/birdcam/
+ADD ai_analyser.py /opt/birdcam/
+ADD exceptions.py /opt/birdcam/
+ADD ffmpeg.py /opt/birdcam/
+ADD visualiser.py /opt/birdcam/
+ADD webcam.py /opt/birdcam/
 ADD docker-entrypoint.sh /opt/birdcam/docker-entrypoint.sh
 
 VOLUME /opt/birdcam/model

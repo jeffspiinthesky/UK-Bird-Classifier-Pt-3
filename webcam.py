@@ -15,6 +15,7 @@ class Webcam:
       self.webcam_feed.set(cv2.CAP_PROP_FRAME_HEIGHT, self.height)
     except Exception as e:
       raise OpenStreamException(f"Cannot open webcam stream: {e.toString()}")
+    print(f'Opened cam: {cam_uri}')
 
   def is_open(self):
     return self.webcam_feed.isOpened()
@@ -39,3 +40,10 @@ class Webcam:
     
   def break_key(self):
     return cv2.waitKey(1)
+  
+  def terminate(self):
+    self.webcam_feed.release()
+    cv2.destroyAllWindows()
+
+  def display_frame(self, frame):
+    cv2.imshow('object_detection', frame)

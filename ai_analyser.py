@@ -1,9 +1,9 @@
 from mediapipe.tasks.python import vision
 import mediapipe as mp
 from mediapipe.tasks import python
-from time import time
+from time import time,time_ns
 from exceptions import NoImageInDetectorException
-from Visualiser import Visualiser
+from visualiser import Visualiser
 
 class Ai_analyser:
   def __init__(self, model, score_threshold, max_results):
@@ -36,17 +36,25 @@ class Ai_analyser:
       self.detection_result_list.append(result)
       self.counter += 1
   
+  def get_fps(self):
+    return self.fps
+  
   def add_image(self, frame):
     self.current_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=frame)
 
 
   def detect(self):
     if (self.current_image is not None):
-      self.detector.detect_async(self.current_image, time.time_ns() // 1_000_000)
+      self.detector.detect_async(self.current_image, time_ns() // 1_000_000)
     else:
       raise NoImageInDetectorException(f'No image has been loaded in the detector')
     
-  def render_result(self, visualiser):
+  def render_result(self, visualiser, orig_image):
+    image = orig_image
     if self.detection_result_list:
-      self.current_frame = visualiser.update_frame(self.current_frame, self.detection_result_list[0])
+      image = visualiser.update_frame(orig_image, self.detection_result_list[0])
       self.detection_result_list.clear()
+    return image
+
+  def terminate(self):
+    self.detector.close()

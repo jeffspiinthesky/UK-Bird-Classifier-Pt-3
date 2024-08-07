@@ -27,3 +27,6 @@ class Ffmpeg:
 
   def get_stdin_pipe(self):
     return self.proc.stdin
+  
+  def output_frame(self, frame):
+    self.proc.stdin.write(frame.tostring())
