@@ -9,3 +9,5 @@ services:
     environment:
       CAM_URI: "rtsp://user:password@192.168.0.20/camera"
       RTMP_OUT: "rtmp://192.168.0.21/birdcam_live"
+      SCORE_THRESHOLD: 0.20
+      MODEL: "/opt/birdcam/model/bird_model.tflite"
